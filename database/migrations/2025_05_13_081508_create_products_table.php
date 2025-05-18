@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('stock')->default(0);
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->foreignId('brand_id')->constrained()->onDelete('cascade');
-            $table->string('image')->nullable(); // Optional: for product images
+            $table->string('image')->nullable(); 
             $table->timestamps();
         });
         
