@@ -89,4 +89,22 @@ class CategoryController extends Controller
         return redirect()->route('categories.index')
             ->with('success', 'Category deleted successfully.');
     }
+
+    /**
+     * API endpoint to get all categories
+     */
+    public function apiIndex()
+    {
+        $categories = Category::all();
+        return response()->json($categories);
+    }
+
+    /**
+     * API endpoint to get a specific category with its products
+     */
+    public function apiShow(Category $category)
+    {
+        $category->load('products');
+        return response()->json($category);
+    }
 }

@@ -89,4 +89,23 @@ class BrandController extends Controller
         return redirect()->route('brands.index')
             ->with('success', 'Brand deleted successfully.');
     }
+
+    /**
+     * API endpoint to get all brands
+     */
+    public function apiIndex()
+    {
+        $brands = Brand::all();
+        return response()->json($brands);
+    }
+
+    /**
+     * API endpoint to get a specific brand with its products
+     */
+    public function apiShow(Brand $category)
+    {
+        $category->load('products');
+        return response()->json($category);
+    }
+
 }

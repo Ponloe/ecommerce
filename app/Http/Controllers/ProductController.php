@@ -147,4 +147,22 @@ class ProductController extends Controller
         return redirect()->route('products.index')
             ->with('success', 'Product deleted successfully.');
     }
+
+    /**
+     * API endpoint to get all products
+     */
+    public function apiIndex()
+    {
+        $products = Product::with(['category', 'brand'])->get();
+        return response()->json($products);
+    }
+
+    /**
+     * API endpoint to get a specific product
+     */
+    public function apiShow(Product $product)
+    {
+        $product->load(['category', 'brand']);
+        return response()->json($product);
+    }
 }
