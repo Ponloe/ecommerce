@@ -16,9 +16,7 @@ export default function Login({ status, canResetPassword }) {
 
     const submit = (e) => {
         e.preventDefault();
-        post(route('login'), {
-            onFinish: () => reset('password'),
-        });
+        post(route('login'));
     };
 
     const [showPassword, setShowPassword] = useState(false);
@@ -27,7 +25,6 @@ export default function Login({ status, canResetPassword }) {
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
             <Head title="Log in | E-commerce Admin" />
             
-            {/* Logo/Brand */}
             <div className="mb-8 text-center">
                 <Link href="/">
                     <span className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">

@@ -31,7 +31,7 @@ class PhoneAuthController extends Controller
             'name' => $request->name,
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
-            'email' => $request->email ?? $request->phone . '@example.com', // Placeholder email if not provided
+            'email' => $request->email ?? $request->phone . '@example.com', #When they sign up without email. it takes their phone and put it in the email
         ]);
 
         // In a real application, you would send a verification code to the phone number here

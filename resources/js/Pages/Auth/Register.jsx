@@ -1,4 +1,3 @@
-// filepath: /Users/sovannsoponloe/Documents/Github/ecommerce-app/resources/js/Pages/Auth/Register.jsx
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useState } from 'react';
 
@@ -13,7 +12,7 @@ export default function Register() {
     const submit = (e) => {
         e.preventDefault();
         post(route('register'), {
-            onFinish: () => reset('password', 'password_confirmation'),
+            onFinish: () => reset('password', 'password_confirmation')
         });
     };
 
