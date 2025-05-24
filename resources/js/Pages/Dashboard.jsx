@@ -293,7 +293,6 @@ export default function Dashboard({ auth, stats }) {
     );
 }
 
-// Helper Components
 function StatCard({ title, value, icon, change, link, alert = false }) {
     return (
         <Link href={link} className="block">
