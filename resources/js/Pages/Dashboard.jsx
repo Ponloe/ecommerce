@@ -11,7 +11,7 @@ export default function Dashboard({ auth, stats }) {
                 <h2 className="text-xl font-semibold leading-tight text-gray-800">
                     Dashboard
                 </h2>
-            }
+            }com
         >
             <Head title="Dashboard" />
 

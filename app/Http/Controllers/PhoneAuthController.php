@@ -94,8 +94,14 @@ class PhoneAuthController extends Controller
      */
     public function profile(Request $request)
     {
+        $user = $request->user();
+
         return response()->json([
             'user' => $request->user(),
+            'name' => $user->name,
+            'email' => $user->email,
+            'phone' => $user->phone,
+            'address' => $user->address,
         ]);
     }
 
@@ -110,6 +116,7 @@ class PhoneAuthController extends Controller
             'name' => 'sometimes|string|max:255',
             'email' => 'sometimes|email|unique:users,email,' . $user->id,
             'phone' => 'sometimes|string|unique:users,phone,' . $user->id,
+            'address' => 'sometimes|string|nullable',
             'current_password' => 'sometimes|required_with:password|current_password',
             'password' => 'sometimes|string|min:8|confirmed',
         ]);
@@ -130,6 +137,10 @@ class PhoneAuthController extends Controller
         
         if ($request->has('phone') && $request->phone !== $user->phone) {
             $user->phone = $request->phone;
+        }
+
+        if ($request->has('address')) {
+            $user->address = $request->address;
         }
         
         // Update password if provided
