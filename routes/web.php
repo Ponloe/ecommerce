@@ -28,10 +28,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('products', \App\Http\Controllers\ProductController::class);
+    Route::post('/products/bulk-action', [ProductController::class, 'bulkAction'])->name('products.bulk-action');
     Route::resource('categories', \App\Http\Controllers\CategoryController::class); 
     Route::resource('brands', \App\Http\Controllers\BrandController::class);
 
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/users', [App\Http\Controllers\UserProfileController::class, 'index'])->name('users.index');
 });
 
 require __DIR__.'/auth.php';

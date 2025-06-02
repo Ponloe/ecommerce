@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+
 
 class UserProfileController extends Controller
 {
@@ -12,7 +15,13 @@ class UserProfileController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::select('id', 'name', 'email', 'phone', 'address', 'email_verified_at', 'created_at')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return Inertia::render('User/Index', [
+            'users' => $users
+        ]);
     }
 
     /**

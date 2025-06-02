@@ -8,7 +8,7 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
 
 export default function Edit({ auth, product, categories, brands }) {
-    const { data, setData, put, processing, errors, progress } = useForm({
+    const { data, setData, post, processing, errors, progress } = useForm({
         name: product.name || '',
         description: product.description || '',
         price: product.price || '',
@@ -16,14 +16,17 @@ export default function Edit({ auth, product, categories, brands }) {
         category_id: product.category_id || '',
         brand_id: product.brand_id || '',
         image: null,
-        _method: 'PUT',
+        _method: 'PUT', 
     });
     
     const [preview, setPreview] = useState(product.image_url || null);
 
     function handleSubmit(e) {
         e.preventDefault();
-        put(route('products.update', product.id));
+        post(route('products.update', product.id), {
+            forceFormData: true,
+            preserveState: true,
+        });
     }
     
     function handleImageChange(e) {
@@ -34,7 +37,6 @@ export default function Edit({ auth, product, categories, brands }) {
             setPreview(URL.createObjectURL(file));
         }
     }
-
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -64,7 +66,6 @@ export default function Edit({ auth, product, categories, brands }) {
                                         className="mt-1 block w-full"
                                         value={data.name}
                                         onChange={(e) => setData('name', e.target.value)}
-                                        required
                                     />
                                     <InputError message={errors.name} className="mt-2" />
                                 </div>
@@ -90,7 +91,6 @@ export default function Edit({ auth, product, categories, brands }) {
                                         className="mt-1 block w-full"
                                         value={data.price}
                                         onChange={(e) => setData('price', e.target.value)}
-                                        required
                                     />
                                     <InputError message={errors.price} className="mt-2" />
                                 </div>
@@ -103,7 +103,6 @@ export default function Edit({ auth, product, categories, brands }) {
                                         className="mt-1 block w-full"
                                         value={data.stock}
                                         onChange={(e) => setData('stock', e.target.value)}
-                                        required
                                     />
                                     <InputError message={errors.stock} className="mt-2" />
                                 </div>
@@ -115,7 +114,6 @@ export default function Edit({ auth, product, categories, brands }) {
                                         className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                         value={data.category_id}
                                         onChange={(e) => setData('category_id', e.target.value)}
-                                        required
                                     >
                                         <option value="">Select a category</option>
                                         {categories.map((category) => (
@@ -134,7 +132,6 @@ export default function Edit({ auth, product, categories, brands }) {
                                         className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                         value={data.brand_id}
                                         onChange={(e) => setData('brand_id', e.target.value)}
-                                        required
                                     >
                                         <option value="">Select a brand</option>
                                         {brands.map((brand) => (
